@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ReactDOM, Route }  from 'react-dom';
-import { Container, Table, Button, Modal } from 'react-bootstrap';
+import { Container, Table, Button, Modal, Spinner } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
 
@@ -30,6 +30,13 @@ function List() {
                 console.log(error);
             });
     }, []);
+
+    if(task.tableData.length===0) return (
+    <div style={{ textAlign:"center", marginTop:"25vh" }}>
+      <Spinner animation="grow" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div> )
 
     return (
       <Container>
@@ -69,7 +76,7 @@ function List() {
             <Modal.Header closeButton>
               <Modal.Title>Delete Item</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Are Yyou sure you want to delete - {deleteItem}</Modal.Body>
+            <Modal.Body>Are you sure you want to delete - {deleteItem}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" size="sm" onClick={handleClose}>
                 Close
