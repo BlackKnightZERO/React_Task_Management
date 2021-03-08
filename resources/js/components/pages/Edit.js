@@ -87,7 +87,7 @@ function Edit(props) {
               <Col md={6}>
                 <Form.Group>
                   <Form.Label>Status</Form.Label>
-                  <Form.Control as="select" name="status" defaultValue={editData.status} onChange={onChangeHandler}>
+                  <Form.Control as="select" name="status" value={editData.status} onChange={onChangeHandler}>
                     <option value="1">Ongoing</option>
                     <option value="0">Completed</option>
                   </Form.Control>

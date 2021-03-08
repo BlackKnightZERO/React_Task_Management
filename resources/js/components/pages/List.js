@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ReactDOM, Route }  from 'react-dom';
 import { Container, Table, Button, Modal } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
 
 function List() {
 
@@ -50,8 +51,8 @@ function List() {
                 <tr key={index}>
                   <td>{index+1}</td>
                   <td>{data.name}</td>
-                  <td>{data.start_time}</td>
-                  <td>{data.end_time}</td>
+                  <td>{data.start_time} - {moment(data.created_at).format('D/M/YYYY')}</td>
+                  <td>{data.end_time} - {(data.end_time) ? moment(data.created_at).format('D/M/YYYY'): ''} </td>
                   <td>{data.status == 1 ? 'Ongoing' : 'Completed'}</td>
                   <td>
                     <Button variant="info" size="sm" className="mr-1" onClick={onEditButtonClick.bind(this, data.id)}>&#128394;</Button>

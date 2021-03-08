@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "moment": "^2.29.1",
         "react-bootstrap": "^1.5.1",
         "react-router-dom": "^5.2.0",
         "sweetalert2": "^10.15.5"
