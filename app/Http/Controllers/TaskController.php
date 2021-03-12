@@ -16,14 +16,15 @@ class TaskController extends Controller
     }
 
     public function store(Request $request){
+
       $this->validate($request, [
         'name' => 'required',
       ]);
       $addData = array(
         'name' => $request->name,
         'status' => $request->status,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
+        'start_time' => isset($request->start_time) ? date('Y-m-d h:i:s', strtotime($request->start_time)) : null ,
+        'end_time' => isset($request->end_time) ? date('Y-m-d h:i:s', strtotime($request->end_time)) : null ,
       );
       $data = Task::create($addData);
       return response()->json([
@@ -47,8 +48,8 @@ class TaskController extends Controller
       $updateData = array(
         'name' => $request->name,
         'status' => $request->status,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
+        'start_time' => isset($request->start_time) ? date('Y-m-d h:i:s', strtotime($request->start_time)) : null ,
+        'end_time' => isset($request->end_time) ? date('Y-m-d h:i:s', strtotime($request->end_time)) : null ,
       );
       $data = Task::where('id', $request->id)->update($updateData);
       return response()->json([

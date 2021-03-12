@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import { sweet_success, sweet_error } from '../../common.js';
+import moment from 'moment';
 
 function Edit(props) {
 
@@ -98,13 +99,13 @@ function Edit(props) {
               <Col md={6}>
                 <Form.Group>
                   <Form.Label>Start Time</Form.Label>
-                  <Form.Control type="time" size="sm" name="start_time" placeholder="Task Start" defaultValue={editData.start_time} onChange={onChangeHandler} />
+                  <Form.Control type="datetime-local" size="sm" name="start_time" placeholder="Task Start" value={moment(editData.start_time).format('YYYY-MM-DDTHH:mm')} onChange={onChangeHandler} />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group>
                   <Form.Label>End Time</Form.Label>
-                  <Form.Control type="time" size="sm" name="end_time" placeholder="Task End" defaultValue={editData.end_time} onChange={onChangeHandler} />
+                  <Form.Control type="datetime-local" size="sm" name="end_time" placeholder="Task End" value={ moment(editData.end_time).format('YYYY-MM-DDTHH:mm') } onChange={onChangeHandler} />
                 </Form.Group>
               </Col>
             </Row>

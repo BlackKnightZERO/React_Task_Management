@@ -38,6 +38,7 @@ function Add() {
            .then(response => {
              if(response.status === 201){
                sweet_success(response.data.message);
+               setAddData({name:'', start_time:'', end_time:'', status:'1',});
              }
            })
            .catch(error => {
@@ -86,13 +87,13 @@ function Add() {
             <Col md={6}>
               <Form.Group>
                 <Form.Label>Start Time</Form.Label>
-                <Form.Control type="time" size="sm" name="start_time" placeholder="Task Start" onChange={onChangeHandler} />
+                <Form.Control type="datetime-local" size="sm" name="start_time" defaultValue="" placeholder="Task Start" onChange={onChangeHandler} />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group>
                 <Form.Label>End Time</Form.Label>
-                <Form.Control type="time" size="sm" name="end_time" placeholder="Task End" onChange={onChangeHandler} />
+                <Form.Control type="datetime-local" size="sm" name="end_time" defaultValue="" placeholder="Task End" onChange={onChangeHandler} />
               </Form.Group>
             </Col>
           </Row>
