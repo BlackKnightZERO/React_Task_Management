@@ -28,3 +28,4 @@ Route::get('/project/task/edit/{id}', 'TaskController@edit');
 Route::post('/project/task/update', 'TaskController@update');
 Route::post('/project/task/store', 'TaskController@store');
 Route::post('/project/task/delete', 'TaskController@delete');
+Route::get('/project/task/search/{search}', 'TaskController@search');

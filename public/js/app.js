@@ -112071,6 +112071,27 @@ function List() {
     }
   };
 
+  var searchHandler = function searchHandler(event) {
+    var _event$target = event.target,
+        name = _event$target.name,
+        value = _event$target.value;
+    var url = '';
+
+    if (!value) {
+      url = "/project/task/get";
+    } else {
+      url = "/project/task/search/".concat(value);
+    }
+
+    axios.get(url).then(function (response) {
+      setTask({
+        tableData: response.data.data
+      });
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  };
+
   var handleDeleteConfirmation = function handleDeleteConfirmation(param) {
     var url = "/project/task/delete";
     axios.post(url, {
@@ -112098,7 +112119,6 @@ function List() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var url = "/project/task/get";
     axios.get(url).then(function (response) {
-      // console.log(response.data.data);
       setTask({
         tableData: response.data.data
       });
@@ -112116,14 +112136,25 @@ function List() {
     </div> )
     */
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Task List", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "float-right"
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Task List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      position: 'absolute',
+      bottom: '0',
+      right: '0'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     style: {
       width: '150px',
       height: '28px'
-    }
+    },
+    name: "search",
+    onChange: searchHandler,
+    placeHolder: "search"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     striped: true,
     bordered: true,

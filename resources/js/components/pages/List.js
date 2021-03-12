@@ -27,6 +27,23 @@ function List() {
     }
   }
 
+  const searchHandler = (event) => {
+    const { name, value } = event.target;
+    let url = '';
+    if(!value) {
+      url = `/project/task/get`;
+    } else {
+      url = `/project/task/search/${value}`;
+    }
+    axios.get(url)
+          .then(response => {
+            setTask({ tableData : response.data.data});
+          })
+          .catch(error => {
+            console.log(error);
+          })
+  };
+
   const handleDeleteConfirmation = (param) => {
     let url = `/project/task/delete`;
     axios.post(url, {id : param})
@@ -55,7 +72,6 @@ function List() {
     let url = `/project/task/get`;
     axios.get(url)
             .then(response => {
-                // console.log(response.data.data);
                 setTask({ tableData : response.data.data});
             })
             .catch(error => {
@@ -74,9 +90,12 @@ function List() {
     return (
       <Container>
         <div>
-          <h2>Task List
-            <span className="float-right"><input type="text" style={{ width: '150px', height: '28px' }} /></span>
-          </h2>
+          <div style={{ position: 'relative' }}>
+            <h2>Task List</h2>
+            <span style={{ position: 'absolute', bottom:'0', right:'0'}}>
+              <input type="text" style={{ width: '150px', height: '28px' }} name="search" onChange={searchHandler} placeHolder="search" />
+            </span>
+          </div>
           <Table striped bordered hover size="sm">
               <thead>
                 <tr>
@@ -99,7 +118,6 @@ function List() {
                   <td>{data.status == 1 ? 'Ongoing' : 'Completed' }</td>
                   <td>
                     <Button variant="info" size="sm" className="mr-1" onClick={onEditButtonClick.bind(this, data.id)}>&#128394;</Button>
-                    { /* &#128681; <Button variant="danger" size="sm" className="mr-1" onClick={onDeleteButtonClick.bind(this, data.id)}>&#10006;</Button>*/}
                     <Button variant="danger" size="sm" className="mr-1" onClick={handleShow.bind(this, data, index)}>&#10006;</Button>
                   </td>
                 </tr>

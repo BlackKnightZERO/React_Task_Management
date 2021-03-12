@@ -66,4 +66,19 @@ class TaskController extends Controller
         'message' => 'Successfully Deleted',
       ], 200);
     }
+
+    public function search($search){
+      $data = Task::when($search, function ($query, $search) {
+        return $query->where('name','LIKE','%'.$search.'%');
+      })->get();
+
+      if($data){
+        return response()->json([
+          'message' => 'Success',
+          'data' => $data,
+        ], 200);
+      }
+    }
+
+
 }
