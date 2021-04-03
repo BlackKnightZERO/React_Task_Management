@@ -112002,6 +112002,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common.js */ "./resources/js/common.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _partials_MyModal_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../partials/MyModal.js */ "./resources/js/components/partials/MyModal.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -112013,6 +112014,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -112090,23 +112092,37 @@ function List() {
     })["catch"](function (error) {
       console.log(error);
     });
-  };
+  }; // const handleDeleteConfirmation = (param) => {
+  //   let url = `/project/task/delete`;
+  //   axios.post(url, {id : param})
+  //         .then(response => {
+  //             sweet_success(response.data.message);
+  //             handleClose();
+  //             let url = `/project/task/get`;
+  //             axios.get(url)
+  //                   .then(response => {
+  //                       setTask({ tableData : response.data.data});
+  //                   })
+  //                   .catch(error => {
+  //                       console.log(error);
+  //                   });
+  //             task.tableData.splice(deleteIndex, 1);
+  //             setTask({ tableData : task.tableData });
+  //         })
+  //         .catch(error => {
+  //           console.log(error);
+  //         })
+  // };
 
-  var handleDeleteConfirmation = function handleDeleteConfirmation(param) {
+
+  var handleDeleteConfirmation2 = function handleDeleteConfirmation2() {
+    var deleteId = deleteItem.id;
     var url = "/project/task/delete";
     axios.post(url, {
-      id: param
+      id: deleteId
     }).then(function (response) {
       Object(_common_js__WEBPACK_IMPORTED_MODULE_4__["sweet_success"])(response.data.message);
       handleClose();
-      var url = "/project/task/get"; // axios.get(url)
-      //       .then(response => {
-      //           setTask({ tableData : response.data.data});
-      //       })
-      //       .catch(error => {
-      //           console.log(error);
-      //       });
-
       task.tableData.splice(deleteIndex, 1);
       setTask({
         tableData: task.tableData
@@ -112177,23 +112193,54 @@ function List() {
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "6",
     className: "text-center"
-  }, "No Data"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+  }, "No Data"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_partials_MyModal_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
     show: show,
-    onHide: handleClose
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
-    closeButton: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Delete Item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, "Are you sure you want to delete - ", deleteItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-    variant: "secondary",
-    size: "sm",
-    onClick: handleClose
-  }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-    variant: "danger",
-    size: "sm",
-    onClick: handleDeleteConfirmation.bind(this, deleteItem.id)
-  }, "Yes"))));
+    onHide: handleClose,
+    deleteItem: deleteItem,
+    handleDeleteConfirmation2: handleDeleteConfirmation2
+  }));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/MyModal.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/partials/MyModal.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+
+
+
+function MyModal(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+    show: props.show,
+    onHide: props.onHide
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
+    closeButton: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Delete Item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, "Are you sure you want to delete - ", props.deleteItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    variant: "secondary",
+    size: "sm",
+    onClick: props.onHide
+  }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    variant: "danger",
+    size: "sm",
+    onClick: props.handleDeleteConfirmation2
+  }, "Yes")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (MyModal);
 
 /***/ }),
 

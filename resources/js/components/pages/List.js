@@ -5,6 +5,7 @@ import { Container, Table, Button, Modal, Spinner } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import { sweet_success, sweet_error } from '../../common.js';
 import moment from 'moment';
+import MyModal from '../partials/MyModal.js';
 
 function List() {
 
@@ -44,24 +45,39 @@ function List() {
           })
   };
 
-  const handleDeleteConfirmation = (param) => {
+  // const handleDeleteConfirmation = (param) => {
+  //   let url = `/project/task/delete`;
+  //   axios.post(url, {id : param})
+  //         .then(response => {
+  //             sweet_success(response.data.message);
+  //             handleClose();
+  //             let url = `/project/task/get`;
+  //             axios.get(url)
+  //                   .then(response => {
+  //                       setTask({ tableData : response.data.data});
+  //                   })
+  //                   .catch(error => {
+  //                       console.log(error);
+  //                   });
+
+  //             task.tableData.splice(deleteIndex, 1);
+  //             setTask({ tableData : task.tableData });
+
+  //         })
+  //         .catch(error => {
+  //           console.log(error);
+  //         })
+  // };
+
+  const handleDeleteConfirmation2 = () => {
+    let deleteId = deleteItem.id;
     let url = `/project/task/delete`;
-    axios.post(url, {id : param})
+    axios.post(url, {id : deleteId})
           .then(response => {
               sweet_success(response.data.message);
               handleClose();
-              let url = `/project/task/get`;
-              // axios.get(url)
-              //       .then(response => {
-              //           setTask({ tableData : response.data.data});
-              //       })
-              //       .catch(error => {
-              //           console.log(error);
-              //       });
-
               task.tableData.splice(deleteIndex, 1);
               setTask({ tableData : task.tableData });
-
           })
           .catch(error => {
             console.log(error);
@@ -127,6 +143,7 @@ function List() {
             </Table>
         </div>
 
+          {/*
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Delete Item</Modal.Title>
@@ -141,6 +158,12 @@ function List() {
               </Button>
             </Modal.Footer>
           </Modal>
+          */}
+          <MyModal
+          show={show}
+          onHide={handleClose}
+          deleteItem={deleteItem}
+          handleDeleteConfirmation2={handleDeleteConfirmation2}></MyModal>
 
       </Container>
     );
