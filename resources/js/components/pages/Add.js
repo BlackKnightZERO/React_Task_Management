@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import { sweet_success, sweet_error } from '../../common.js';
 
+// import ApiDataService from '../../services/ApiService';
+
 function Add() {
 
   const [addData, setAddData] = useState({name:'', start_time:'', end_time:'', status:'1',});
@@ -44,6 +46,13 @@ function Add() {
            .catch(error => {
              console.log(error);
            })
+
+        // res = await ApiDataService.callApi('post', url, data);
+        // if(res.status === 201){
+        //   sweet_success(response.data.message);
+        //   setAddData({name:'', start_time:'', end_time:'', status:'1',});
+        // }  
+
     } else {
       sweet_error(formError.errors.name);
     }

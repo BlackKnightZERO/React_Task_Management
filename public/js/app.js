@@ -111673,7 +111673,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // import ApiDataService from '../../services/ApiService';
 
 function Add() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -111733,7 +111733,11 @@ function Add() {
         }
       })["catch"](function (error) {
         console.log(error);
-      });
+      }); // res = await ApiDataService.callApi('post', url, data);
+      // if(res.status === 201){
+      //   sweet_success(response.data.message);
+      //   setAddData({name:'', start_time:'', end_time:'', status:'1',});
+      // }  
     } else {
       Object(_common_js__WEBPACK_IMPORTED_MODULE_3__["sweet_error"])(formError.errors.name);
     }
@@ -112262,8 +112266,8 @@ function MyModal(props) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\ReactCrudLaravel7\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\ReactCrudLaravel7\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\ReactTaskManagement\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\ReactTaskManagement\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
