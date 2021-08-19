@@ -86,8 +86,9 @@ function Add() {
               <Form.Group>
                 <Form.Label>Status</Form.Label>
                 <Form.Control as="select" name="status" onChange={onChangeHandler}>
-                  <option value="1">Ongoing</option>
-                  <option value="0">Completed</option>
+                  <option value={1}>Ongoing</option>
+                  <option value={0}>Completed</option>
+                  <option value={2}>Stopped</option>
                 </Form.Control>
               </Form.Group>
             </Col>

@@ -6,6 +6,9 @@ import { useHistory } from "react-router-dom";
 import { sweet_success, sweet_error } from '../../common.js';
 import moment from 'moment';
 import MyModal from '../partials/MyModal.js';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function List() {
 
@@ -25,6 +28,42 @@ function List() {
   const generateEmoji = (param) => {
     if(param == 0){
       return <span>&#128681;</span>;
+    }
+  }
+
+  const generateStatus = (param) => {
+    if(param == 1){
+      return 'Ongoing';
+    } else if (param == 0) {
+      return 'Completed';
+    } else if(param == 2) {
+      return 'Stopped';
+    } else {
+      return '';
+    }
+  }
+
+  const countOngoing = (task) => {
+    if(task) {
+      return task.filter(item => item.status==1).length;
+    } else {
+      return 0;
+    }
+  }
+
+  const countCompleted = (task) => {
+    if(task) {
+      return task.filter(item => item.status==0).length;
+    } else {
+      return 0;
+    }
+  }
+
+  const countStopped = (task) => {
+    if(task) {
+      return task.filter(item => item.status==2).length;
+    } else {
+      return 0;
     }
   }
 
@@ -105,11 +144,65 @@ function List() {
     */}
     return (
       <Container>
-        <div>
+        <Row>
+          <Col xs={4}>
+            <Card
+                bg='success'
+                key={0}
+                text='light'
+                style={{ width: '18rem' }}
+                className="mb-2"
+              >
+                {/* <Card.Header>Header</Card.Header> */}
+                <Card.Body>
+                  <Card.Title>Achieved <span>&#128681;</span></Card.Title>
+                  <Card.Text>
+                  { countCompleted(task.tableData) } Skills
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+          <Col xs={4}>
+            <Card
+                bg='info'
+                key={0}
+                text='light'
+                style={{ width: '18rem' }}
+                className="mb-2"
+              >
+                {/* <Card.Header>Header</Card.Header> */}
+                <Card.Body>
+                  <Card.Title>Ongoing <span>&#128293;</span></Card.Title>
+                  <Card.Text>
+                  { countOngoing(task.tableData) } Skills
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+          <Col xs={4}>
+            <Card
+                bg='secondary'
+                key={0}
+                text='light'
+                style={{ width: '18rem' }}
+                className="mb-2"
+              >
+                {/* <Card.Header>Header</Card.Header> */}
+                <Card.Body>
+                  <Card.Title>Stopped <span>&#9940;</span></Card.Title>
+                  <Card.Text>
+                  { countStopped(task.tableData) } Skills
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+        </Row>
+
+        <div style={{ marginTop: '10px' }}>
           <div style={{ position: 'relative' }}>
             <h2>Task List</h2>
             <span style={{ position: 'absolute', bottom:'0', right:'0'}}>
-              <input type="text" style={{ width: '150px', height: '28px' }} name="search" onChange={searchHandler} placeHolder="search" />
+              <input type="text" style={{ width: '150px', height: '28px' }} name="search" onChange={searchHandler} placeholder="search" />
             </span>
           </div>
           <Table striped bordered hover size="sm">
@@ -131,7 +224,7 @@ function List() {
                   <td>{data.name} {generateEmoji(data.status)} </td>
                   <td>{ (data.start_time) ? moment(data.start_time).format('D/M/YYYY ~ hh:mmA') : '--' }</td>
                   <td>{ (data.end_time) ? moment(data.end_time).format('D/M/YYYY ~ hh:mmA') : '--' }</td>
-                  <td>{data.status == 1 ? 'Ongoing' : 'Completed' }</td>
+                  <td>{generateStatus(data.status)}</td>
                   <td>
                     <Button variant="info" size="sm" className="mr-1" onClick={onEditButtonClick.bind(this, data.id)}>&#128394;</Button>
                     <Button variant="danger" size="sm" className="mr-1" onClick={handleShow.bind(this, data, index)}>&#10006;</Button>
